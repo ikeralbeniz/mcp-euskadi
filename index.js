@@ -109,6 +109,19 @@ server.tool("zaragoza-bizi-estimations", "Get the estimation of bikes and free s
     }
   }
 )
+server.tool("google-maps-link", "Get a Google Maps link from coordinates to help people to find a station o stop",
+  {
+    latitude: z.number(),
+    longitude: z.number()
+  },
+  async ({latitude, longitude}) => {
+    const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    return {
+      content: [{ type: "text", text: mapsUrl }]
+    };
+  }
+)
+
 
 
 
