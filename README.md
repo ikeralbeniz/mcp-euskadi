@@ -26,15 +26,35 @@ The server will start and connect to the MCP transport layer.
 
 ## Available Tools
 
-The server provides two main tools:
+The server provides the following tools:
 
 1. `zaragoza-tram-estimations`: Get real-time arrival estimations for a specific tram station
-   - Parameters: `station` (string)
+   - Parameters: `station` (number)
    - Returns: JSON with arrival times
 
 2. `zaragoza-tram-stations`: Get a list of all tram stations in Zaragoza
    - Parameters: none
    - Returns: JSON with station information
+
+3. `zaragoza-bus-stops`: Get all bus stops in Zaragoza
+   - Parameters: none
+   - Returns: JSON with bus stop locations
+
+4. `zaragoza-bus-estimations`: Get real-time arrival estimations for a specific bus stop
+   - Parameters: `stop` (number)
+   - Returns: JSON with arrival times
+
+5. `zaragoza-bizi-stations`: Get all Bizi stations in Zaragoza
+   - Parameters: none
+   - Returns: JSON with Bizi station locations
+
+6. `zaragoza-bizi-estimations`: Get real-time availability of bikes and free slots in a Bizi station
+   - Parameters: `station` (number)
+   - Returns: JSON with bikes and parking availability
+
+7. `google-maps-link`: Get a Google Maps link for a specific location
+   - Parameters: `latitude` (number), `longitude` (number)
+   - Returns: Google Maps URL
 
 ## Dependencies
 
