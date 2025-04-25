@@ -25,13 +25,17 @@ server.tool("zaragoza-tram-estimations", "Get the estimation of when arrives to 
 )
 
 server.tool("zaragoza-tram-stations", "Get all tram stations in Zaragoza",
-  {},
-  async () => {
+  {
+    latitude: z.number(),
+    longitude: z.number()
+  },
+  async ({latitude, longitude}) => {
     const response = await fetch("https://dndzgz.herokuapp.com/services/tram");
     if(response.ok){
       const data = await response.json();
+      const nearestPositions = getTopNearestPositions(data.locations, latitude, longitude);
       return {
-        content: [{ type: "text", text: JSON.stringify(data) }]
+        content: [{ type: "text", text: JSON.stringify(nearestPositions) }]
       };
     }else{
       return {
@@ -42,13 +46,17 @@ server.tool("zaragoza-tram-stations", "Get all tram stations in Zaragoza",
 )
 
 server.tool("zaragoza-bus-stops", "Get all bus stops in Zaragoza",
-  {},
-  async () => {
+  {
+    latitude: z.number(),
+    longitude: z.number()
+  },
+  async ({latitude, longitude}) => {
     const response = await fetch("https://dndzgz.herokuapp.com/services/bus");
     if(response.ok){
       const data = await response.json();
+      const nearestPositions = getTopNearestPositions(data.locations, latitude, longitude);
       return {
-        content: [{ type: "text", text: JSON.stringify(data.locations) }]
+        content: [{ type: "text", text: JSON.stringify(nearestPositions) }]
       };
     }else{
       return {
@@ -76,13 +84,17 @@ server.tool("zaragoza-bus-estimations", "Get the estimation of when a bus arrive
 )
 
 server.tool("zaragoza-bizi-stations", "Get all Bizi stations in Zaragoza, the bicycle rental public service",
-  {},
-  async () => {
+  {
+    latitude: z.number(),
+    longitude: z.number()
+  },
+  async ({latitude, longitude}) => {
     const response = await fetch("https://dndzgz.herokuapp.com/services/bizi");
     if(response.ok){
       const data = await response.json();
+      const nearestPositions = getTopNearestPositions(data.locations, latitude, longitude);
       return {
-        content: [{ type: "text", text: JSON.stringify(data) }]
+        content: [{ type: "text", text: JSON.stringify(nearestPositions) }]
       };
     }else{
       return {
@@ -152,6 +164,35 @@ server.tool("geolocation-from-address", "Get the geolocation (latitude and longi
     }
   }
 );
+
+function getTopNearestPositions(positions, latitude, longitude, size=10){
+  return getOrderedPositionsByDistance(positions, latitude, longitude).slice(0, size);
+}
+
+function getOrderedPositionsByDistance(positions, latitude, longitude) {
+  return positions.map((position) => {
+    const distanceInMeters = haversineDistanceInMeters({ lat: latitude, lon: longitude }, position);
+    return {
+      ...position,
+      distanceInMeters
+    };
+  }).sort((a, b) => a.distanceInMeters - b.distanceInMeters);
+}
+
+function haversineDistanceInMeters(position1, position2) {
+  const toRadians = (degrees) => degrees * (Math.PI / 180);
+
+  const radiusOfEarth = 6371;
+  const dLat = toRadians(position2.lat - position1.lat);
+  const dLon = toRadians(position2.lon - position1.lon);
+
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRadians(position1.lat)) * Math.cos(toRadians(position2.lat)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return radiusOfEarth * c * 1000;
+}
 
 async function main() {
   const transport = new StdioServerTransport();
