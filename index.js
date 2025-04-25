@@ -121,8 +121,37 @@ server.tool("google-maps-link", "Get a Google Maps link from coordinates to help
   }
 )
 
+server.tool("geolocation-from-address", "Get the geolocation (latitude and longitude) from an address and the formatted address that was found, only for Zaragoza. Can be used to find a bus stops, tram stations or bizi stations",
+  {
+    address: z.string()
+  },
+  async ({ address }) => {
+    const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+    const encodedAddress = encodeURIComponent(`${address}, Zaragoza, Spain`);
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
 
-
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.status === "OK" && data.results.length > 0) {
+        const location = data.results[0].geometry.location;
+        location.confindence = data.results[0].geometry.location_type;
+        location.formatted_address = data.results[0].formatted_address;
+        return {
+          content: [{ type: "text", text: JSON.stringify(location) }]
+        };
+      } else {
+        return {
+          content: [{ type: "text", text: `No geolocation found for the address: ${address}` }]
+        };
+      }
+    } else {
+      return {
+        content: [{ type: "text", text: `Failed to fetch geolocation for the address: ${address}` }]
+      };
+    }
+  }
+);
 
 async function main() {
   const transport = new StdioServerTransport();

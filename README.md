@@ -15,6 +15,11 @@ cd mcp-dndzgz
 npm install
 ```
 
+3. Add a .env with the environment variable with a valid google maps api key
+```
+GOOGLE_MAPS_API_KEY=your-api-key
+```
+
 ## Running the Application
 
 To start the server:
@@ -55,6 +60,11 @@ The server provides the following tools:
 7. `google-maps-link`: Get a Google Maps link for a specific location
    - Parameters: `latitude` (number), `longitude` (number)
    - Returns: Google Maps URL
+
+8. `geolocation-from-address`: Get the geolocation (latitude and longitude) from an address and the formatted address that was found
+   - Parameters:
+     - `address` (string): The address to geolocate (e.g., "Plaza del Pilar, Zaragoza, Spain")
+   - Returns: JSON with the latitude, longitude, confidence level, and formatted address
 
 ## Dependencies
 
