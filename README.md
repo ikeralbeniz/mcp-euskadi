@@ -15,16 +15,33 @@ cd mcp-dndzgz
 npm install
 ```
 
-3. Add a .env with the environment variable with a valid google maps api key
-```
+## Running the Application
+
+Add a the environment variable with a valid google maps api key
+```bash
 GOOGLE_MAPS_API_KEY=your-api-key
 ```
-
-## Running the Application
 
 To start the server:
 ```bash
 npm start
+```
+
+Or configure in your MCP client:
+```json
+{
+    "mcpServers": {
+        "dndzgz": {
+            "command": "node",
+            "args": [
+                "/Users/genially/workspace/mcp-dndzgz/index.js"
+            ],
+            "env": {
+                "GOOGLE_MAPS_API_KEY": "your-api-key"
+            }
+        }
+    }
+}
 ```
 
 The server will start and connect to the MCP transport layer.
