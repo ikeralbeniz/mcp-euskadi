@@ -200,6 +200,17 @@ server.tool(
   },
   async ({ address }) => {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+    if (!GOOGLE_MAPS_API_KEY) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: "You should configure the GOOGLE_MAPS_API_KEY for MCP DNDzgz",
+          },
+        ],
+      };
+    }
+
     const encodedAddress = encodeURIComponent(`${address}, Zaragoza, Spain`);
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
 
