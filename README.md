@@ -27,14 +27,14 @@ To start the server:
 npm start
 ```
 
-Or configure in your MCP client:
+Or configure in your MCP client, for example:
 ```json
 {
     "mcpServers": {
         "dndzgz": {
             "command": "node",
             "args": [
-                "/Users/genially/workspace/mcp-dndzgz/index.js"
+                "/Users/danilat/workspace/mcp-dndzgz/index.js"
             ],
             "env": {
                 "GOOGLE_MAPS_API_KEY": "your-api-key"
