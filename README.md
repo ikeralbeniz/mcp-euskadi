@@ -1,12 +1,12 @@
-# DNDzgz MCP Server
+#Open Data Euskadi MCP Server
 
-This is an MCP (Model Context Protocol) server that provides information about the Zaragoza tram system, including real-time tram arrival estimations and station information using the [DNDzgz](https://www.dndzgz.com/) API.
+This is an MCP (Model Context Protocol) server that provides information about the Basque Open Data system,  forked from DNDzgz MCP Server[https://github.com/danilat/mcp-dndzgz] that provides information about the Zaragoza tram system, including real-time tram arrival estimations and station information using the [DNDzgz](https://www.dndzgz.com/) API.
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/danilat/mcp-dndzgz.git
+git clone https://github.com/ikeralbeniz/mcp-euskadi.git
 cd mcp-dndzgz
 ```
 
@@ -34,7 +34,7 @@ Or configure in your MCP client, for example:
         "dndzgz": {
             "command": "node",
             "args": [
-                "/Users/danilat/workspace/mcp-dndzgz/index.js"
+                "/Users/ikeralbeniz/workspace/mcp-euskadi/index.js"
             ],
             "env": {
                 "GOOGLE_MAPS_API_KEY": "your-api-key"
@@ -49,7 +49,7 @@ The server will start and connect to the MCP transport layer.
 ## Available Tools
 
 The server provides the following tools:
-
+<!-- 
 1. `zaragoza-tram-estimations`: Get real-time arrival estimations for a specific tram station
    - Parameters: 
      - `station` (number): ID of the tram station
@@ -82,7 +82,7 @@ The server provides the following tools:
    - Parameters: 
      - `station` (number): ID of the Bizi station
    - Returns: JSON with bikes and parking slot availability
-
+-->
 7. `google-maps-link`: Get a Google Maps link for a specific location
    - Parameters: 
      - `latitude` (number): Latitude of the location
