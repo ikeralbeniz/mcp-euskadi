@@ -1,6 +1,6 @@
 # Open Data Euskadi MCP Server
 
-This is an MCP (Model Context Protocol) server that provides information about the Basque Open Data system,  forked from [DNDzgz MCP Server][https://github.com/danilat/mcp-dndzgz] that provides information about the Zaragoza tram system, including real-time tram arrival estimations and station information using the [DNDzgz](https://www.dndzgz.com/) API.
+This is an MCP (Model Context Protocol) server that provides information about the Basque Open Data system,  forked from [DNDzgz MCP Server](https://github.com/danilat/mcp-dndzgz) that provides information about the Zaragoza tram system, including real-time tram arrival estimations and station information using the [DNDzgz](https://www.dndzgz.com/) API.
 
 ## Installation
 
