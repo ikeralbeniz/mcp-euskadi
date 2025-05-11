@@ -31,7 +31,7 @@ Or configure in your MCP client, for example:
 ```json
 {
     "mcpServers": {
-        "dndzgz": {
+        "euskadi": {
             "command": "node",
             "args": [
                 "/Users/ikeralbeniz/workspace/mcp-euskadi/index.js"
