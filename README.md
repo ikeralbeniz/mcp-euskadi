@@ -46,10 +46,11 @@ Or configure in your MCP client, for example:
 
 The server will start and connect to the MCP transport layer.
 
+<!-- 
 ## Available Tools
 
 The server provides the following tools:
-<!-- 
+
 1. `zaragoza-tram-estimations`: Get real-time arrival estimations for a specific tram station
    - Parameters: 
      - `station` (number): ID of the tram station
@@ -82,7 +83,7 @@ The server provides the following tools:
    - Parameters: 
      - `station` (number): ID of the Bizi station
    - Returns: JSON with bikes and parking slot availability
--->
+
 7. `google-maps-link`: Get a Google Maps link for a specific location
    - Parameters: 
      - `latitude` (number): Latitude of the location
@@ -93,14 +94,16 @@ The server provides the following tools:
    - Parameters:
      - `address` (string): The address to geolocate (e.g., "Plaza de San Francisco, Zaragoza, Spain")
    - Returns: JSON with latitude, longitude, confidence level, and formatted address
-
+-->
 ## Dependencies
 
 - @modelcontextprotocol/sdk: ^1.9.0
 
+<!-- 
 
 ## Example
 
 There is an screenshot with example using Claude Desktop
 
 ![Screenshot of an example using Claude Desktop, asking in spanish to get the tram estimations for Romareda station](./docs/sample.png)
+-->
